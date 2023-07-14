@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { authenticateUser } from "../features/slices/auth";
+import { authenticateUser, islogin } from "../features/slices/auth";
 import Error from "./Error";
 
 const CardLogin = () => {
   const navigate = useNavigate();
   const { isAuthenticated, isError } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -15,13 +16,8 @@ const CardLogin = () => {
     const username = e.target.username.value;
     const password = e.target.password.value;
     authenticateUser({ username, password });
+    navigate("/dashboard");
   }
-
-  useEffect(() => {
-    if (isAuthenticated === true) {
-      navigate("/dashboard");
-    }
-  }, []);
   return (
     <>
       <div className="absolute top-5 right-10">{isError && <Error />}</div>
@@ -32,14 +28,14 @@ const CardLogin = () => {
           daftarkan.
         </h3>
         <div>
-          <form className="flex w-full flex-col gap-4" onSubmit={handleSubmit}>
+          <form className="flex flex-col w-full gap-4" onSubmit={handleSubmit}>
             <div className="w-full py-[14px] px-5 flex gap-[10px] rounded-full border-[1px] ">
               <img src="./person.png" alt="person" />
               <input
                 type="text"
                 name="username"
                 id="username"
-                className="border-none outline-none w-full"
+                className="w-full border-none outline-none"
               />
             </div>
             <div className="w-full py-[14px] px-5 flex gap-[10px] rounded-full border-[1px] ">
@@ -48,7 +44,7 @@ const CardLogin = () => {
                 type="password"
                 name="password"
                 id="password"
-                className="border-none outline-none w-full"
+                className="w-full border-none outline-none"
               />
             </div>
             <button

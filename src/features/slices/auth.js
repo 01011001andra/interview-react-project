@@ -5,7 +5,25 @@ const initialState = {
   isError: false,
   isAuthenticated: false,
   token: null,
-  username: "",
+  username: "azvyae@example.app",
+  data: {
+    data: {
+      foods: [
+        {
+          name: "Rendang",
+          price: 20000,
+        },
+        {
+          name: "Ayam Goreng",
+          price: 15000,
+        },
+        {
+          name: "Nasi Uduk",
+          price: 10000,
+        },
+      ],
+    },
+  },
 };
 
 export const authenticateUser = createAsyncThunk(
@@ -34,6 +52,9 @@ const authSlice = createSlice({
       state.token = null;
       state.username = "";
     },
+    islogin(state) {
+      state.isAuthenticated = true;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -49,5 +70,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, islogin } = authSlice.actions;
 export default authSlice.reducer;
