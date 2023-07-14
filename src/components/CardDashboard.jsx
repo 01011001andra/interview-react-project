@@ -1,9 +1,13 @@
+import { useSelector } from "react-redux";
+
 const CardDashboard = () => {
+  const { username } = useSelector((state) => state.auth);
+  console.log(username);
   return (
     <div className="w-full h-full flex flex-col py-8 px-10 rounded-[24px] bg-white shadow-2xl gap-6 z-30">
       <h1 className="text-[28px] font-semibold py-4">Dashboard</h1>
-      <h3 className="text-[12px]">Selamat datang user@user.com</h3>
-      <div className="w-full">
+      <h3 className="text-[12px]">Selamat datang {username}</h3>
+      <div className="w-full flex flex-col gap-6">
         <h3 className="text-[12px] ">Daftar makanan:</h3>
         <ul className="list-disc pl-4">
           <li className="text-[12px]">Ayam Goreng [Rp. 15.000]</li>

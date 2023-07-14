@@ -1,5 +1,5 @@
-import CardLogin from "../components/CardLogin";
-import MainLayout from "../Layout/mainLayout";
+import { CardLogin } from "../components";
+import { MainLayout } from "../Layout";
 
 const Login = () => {
   return (
